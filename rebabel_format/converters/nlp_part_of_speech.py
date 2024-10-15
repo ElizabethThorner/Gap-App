@@ -53,19 +53,21 @@ class NLPPartOfSpeechReader(LineReader):
     def process_line(self, line: str):
         """Process one line of the file at a time."""
 
-        for index, item in enumerate(line.split(), 1):
-            self.set_type(index, "word")
-            self.set_parent(index, "sentence")
-            self.set_feature(index, "meta:index", "int", index)
+        for index, item in enumerate(line.strip().split(), 1):
+            index_as_string = str(index)
+
+            self.set_type(index_as_string, "word")
+            self.set_parent(index_as_string, "sentence")
+            self.set_feature(index_as_string, "meta:index", "int", index)
 
             if self.nlpFileType == "combined":
                 word, part_of_speech = item.split(self.delimiter)
-                self.set_feature(index, "nlp:form", "str", word)
-                self.set_feature(index, "nlp:pos", "str", part_of_speech)
+                self.set_feature(index_as_string, "nlp:form", "str", word)
+                self.set_feature(index_as_string, "nlp:pos", "str", part_of_speech)
             elif self.nlpFileType == "language":
-                self.set_feature(index, "nlp:form", "str", item)
+                self.set_feature(index_as_string, "nlp:form", "str", item)
             else:
-                self.set_feature(index, "nlp:pos", "str", item)
+                self.set_feature(index_as_string, "nlp:pos", "str", item)
 
         if line:
             self.set_type('sentence', 'sentence')
