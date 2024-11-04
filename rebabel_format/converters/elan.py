@@ -61,7 +61,7 @@ class EAFReader(XMLReader):
     then the units imported from it will have the integer feature
     `alignment:index` which starts at `1` for a given parent element.
     '''
-    identifier = 'eaf'
+    identifier = 'elan'
     short_name = 'ELAN'
     long_name = 'ELAN annotation file'
     format_specification = 'https://www.mpi.nl/tools/elan/EAF_Annotation_Format_3.0_and_ELAN.pdf'
